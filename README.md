@@ -49,14 +49,14 @@ Content-Type: application/json
 
 응답에 성공하면 결괏값을 JSON 형식으로 반환합니다.
 
-|파라미터|타입| 필수여부 |           설명           |
-|:---:|:---:|:----:|:----------------------:|
-|id|String|  Y   |       통화 고유 식별자        |
-|currencyName|String|  Y   | 통화 이름(50자를 넘을 수 없습니다.) |
-|exchangeRate|BigDecimal|  Y   |           환율           |
-|symbol|String|  Y   |           표시(50자를 넘을 수 없습니다.)            |
-|createdAt|LocalDateTime|  Y   |          생성일           |
-|modifiedAt|LocalDateTime|  Y   |          수정일           |
+|     파라미터     |타입| 필수여부 |           설명           |
+|:------------:|:---:|:----:|:----------------------:|
+|      id      |String|  Y   |       통화 고유 식별자        |
+| currencyName |String|  Y   | 통화 이름(50자를 넘을 수 없습니다.) |
+| exchangeRate |BigDecimal|  Y   |           환율           |
+|    symbol    |String|  Y   |           표시(50자를 넘을 수 없습니다.)            |
+| createdDate  |LocalDateTime|  Y   |          생성일           |
+| updatedDate  |LocalDateTime|  Y   |          수정일           |
 
 - 참고사항
 
@@ -71,8 +71,8 @@ Content-Type: application/json
   "currencyName": "USD",
   "exchangeRate": 1430.00,
   "symbol": "$",
-  "createdAt": "2024-11-28T20:55:09.198232",
-  "modifiedAt": "2024-11-28T20:55:09.198232"
+  "createdDate": "2024-11-28T20:55:09.198232",
+  "updatedDate": "2024-11-28T20:55:09.198232"
 }
 ```
 
@@ -97,14 +97,14 @@ GET /api/currencies/{id}
 
 응답에 성공하면 결괏값을 JSON 형식으로 반환합니다.
 
-|파라미터|타입|필수여부|설명|
-|:---:|:---:|:---:|:-----:|
-|id|String|  Y   |       통화 고유 식별자        |
-|currencyName|String|  Y   | 통화 이름(50자를 넘을 수 없습니다.) |
-|exchangeRate|BigDecimal|  Y   |           환율           |
-|symbol|String|  Y   |           표시(50자를 넘을 수 없습니다.)            |
-|createdAt|LocalDateTime|  Y   |          생성일           |
-|modifiedAt|LocalDateTime|  Y   |          수정일           |
+|     파라미터     |타입|필수여부|설명|
+|:------------:|:---:|:---:|:-----:|
+|      id      |String|  Y   |       통화 고유 식별자        |
+| currencyName |String|  Y   | 통화 이름(50자를 넘을 수 없습니다.) |
+| exchangeRate |BigDecimal|  Y   |           환율           |
+|    symbol    |String|  Y   |           표시(50자를 넘을 수 없습니다.)            |
+| createdDate  |LocalDateTime|  Y   |          생성일           |
+|   updatedDate   |LocalDateTime|  Y   |          수정일           |
 
 - 참고사항
 
@@ -119,8 +119,8 @@ Content-Type: application/json
   "currencyName": "USD",
   "exchangeRate": 1430.00,
   "symbol": "$",
-  "createdAt": "2024-11-28T20:55:09.198232",
-  "modifiedAt": "2024-11-28T20:55:09.198232"
+  "createdDate": "2024-11-28T20:55:09.198232",
+  "updatedDate": "2024-11-28T20:55:09.198232"
 }
 ```
 
@@ -146,14 +146,14 @@ GET /api/currencies
 
 응답에 성공하면 결괏값을 JSON 형식으로 반환합니다.
 
-|파라미터|타입|필수여부|설명|
-|:---:|:---:|:---:|:-----:|
-|id|String|  Y   |       통화 고유 식별자        |
-|currencyName|String|  Y   | 통화 이름(50자를 넘을 수 없습니다.) |
-|exchangeRate|BigDecimal|  Y   |           환율           |
-|symbol|String|  Y   |           표시(50자를 넘을 수 없습니다.)            |
-|createdAt|LocalDateTime|  Y   |          생성일           |
-|modifiedAt|LocalDateTime|  Y   |          수정일           |
+|     파라미터     |타입|필수여부|설명|
+|:------------:|:---:|:---:|:-----:|
+|      id      |String|  Y   |       통화 고유 식별자        |
+| currencyName |String|  Y   | 통화 이름(50자를 넘을 수 없습니다.) |
+| exchangeRate |BigDecimal|  Y   |           환율           |
+|    symbol    |String|  Y   |           표시(50자를 넘을 수 없습니다.)            |
+| createdDate  |LocalDateTime|  Y   |          생성일           |
+|   updatedDate   |LocalDateTime|  Y   |          수정일           |
 
 - 참고사항
 
@@ -169,16 +169,16 @@ Content-Type: application/json
     "currencyName": "USD",
     "exchangeRate": 1430.00,
     "symbol": "$",
-    "createdAt": "2024-11-28T20:55:09.198232",
-    "modifiedAt": "2024-11-28T20:55:09.198232"
+    "createdDate": "2024-11-28T20:55:09.198232",
+    "updatedDate": "2024-11-28T20:55:09.198232"
   },
   {
     "id": 2,
     "currencyName": "USD",
     "exchangeRate": 1431.00,
     "symbol": "$",
-    "createdAt": "2024-11-28T20:55:09.198232",
-    "modifiedAt": "2024-11-28T20:55:09.198232"
+    "createdDate": "2024-11-28T20:55:09.198232",
+    "updatedDate": "2024-11-28T20:55:09.198232"
   }
 ]
 ```
@@ -196,8 +196,8 @@ CREATE TABLE currency
     currency_name VARCHAR(50) COMMENT '통화 이름',
     exchange_rate DECIMAL(38,2) COMMENT '환율',
     symbol VARCHAR(50) COMMENT '표시',
-    created_at DATETIME(6) COMMENT '작성일',
-    modified_at DATETIME(6) COMMENT '수정일'
+    created_date DATETIME(6) COMMENT '작성일',
+    updated_date DATETIME(6) COMMENT '수정일'
 );
 
 ```
@@ -205,8 +205,8 @@ CREATE TABLE currency
 ### INSERT (통화 등록)
 ```mysql
 -- currency 테이블에 데이터 삽입
-INSERT INTO currency (id, currency_name, exchange_rate, symbol, created_at,modified_at) VALUES('1', 'USD', '1431.00', '$', now(), now());
-INSERT INTO currency (id, currency_name, exchange_rate, symbol, created_at, modified_at) VALUES('2', 'USD', '1432.00', '$', now(), now());
+INSERT INTO currency (id, currency_name, exchange_rate, symbol, created_date,updated_date) VALUES('1', 'USD', '1431.00', '$', now(), now());
+INSERT INTO currency (id, currency_name, exchange_rate, symbol, created_date, updated_date) VALUES('2', 'USD', '1432.00', '$', now(), now());
 
 ```
 
@@ -269,14 +269,13 @@ Content-Type: application/json
 
 응답에 성공하면 결괏값을 JSON 형식으로 반환합니다.
 
-|파라미터|타입|필수여부|설명|
-|:---:|:---:|:---:|:-----:|
-|id|String|Y|유저 고유 식별자|
-|name|String|Y| 유저 이름 (100자를 넘을 수 없습니다.)  |
-|email|String|Y| 유저 이메일 (100자를 넘을 수 없습니다.) |
-|createdAt|LocalDateTime|Y|생성일|
-|modifiedAt|LocalDateTime|Y|수정일|
-
+|     파라미터     |타입|필수여부|설명|
+|:------------:|:---:|:---:|:-----:|
+|      id      |String|Y|유저 고유 식별자|
+|     name     |String|Y| 유저 이름 (100자를 넘을 수 없습니다.)  |
+|    email     |String|Y| 유저 이메일 (100자를 넘을 수 없습니다.) |
+| createdDate  |LocalDateTime|Y|생성일|
+| updatedDate |LocalDateTime|Y|수정일|
 - 참고사항
 
 HTTP/1.1 200 OK
@@ -289,8 +288,8 @@ Content-Type: application/json
   "id": 1,
   "name": "홍길동",
   "email": "a@a.com",
-  "createdAt": "2024-11-28T20:55:09.198232",
-  "modifiedAt": "2024-11-28T20:55:09.198232"
+  "createdDate": "2024-11-28T20:55:09.198232",
+  "updatedDate": "2024-11-28T20:55:09.198232"
 }
 ```
 
@@ -321,8 +320,8 @@ GET /api/users/{id}
 |id|String|Y|유저 고유 식별자|
 |name|String|Y| 유저 이름 (100자를 넘을 수 없습니다.)  |
 |email|String|Y| 유저 이메일 (100자를 넘을 수 없습니다.) |
-|createdAt|LocalDateTime|Y|생성일|
-|modifiedAt|LocalDateTime|Y|수정일|
+| createdDate  |LocalDateTime|Y|생성일|
+| updatedDate |LocalDateTime|Y|수정일|
 
 - 참고사항
 
@@ -334,8 +333,8 @@ HTTP/1.1 200 OK
   "id": 1,
   "name": "홍길동",
   "email": "a@a.com",
-  "createdAt": "2024-11-28T20:55:09.198232",
-  "modifiedAt": "2024-11-28T20:55:09.198232"
+  "createdDate": "2024-11-28T20:55:09.198232",
+  "updatedDate": "2024-11-28T20:55:09.198232"
 }
 ```
 
@@ -361,13 +360,13 @@ GET /api/users
 
 응답에 성공하면 결괏값을 JSON 형식으로 반환합니다.
 
-|파라미터|타입|필수여부|설명|
-|:---:|:---:|:---:|:-----:|
-|id|String|Y|유저 고유 식별자|
-|name|String|Y| 유저 이름 (100자를 넘을 수 없습니다.)  |
-|email|String|Y| 유저 이메일 (100자를 넘을 수 없습니다.) |
-|createdAt|LocalDateTime|Y|생성일|
-|modifiedAt|LocalDateTime|Y|수정일|
+|    파라미터     |타입|필수여부|설명|
+|:-----------:|:---:|:---:|:-----:|
+|     id      |String|Y|유저 고유 식별자|
+|    name     |String|Y| 유저 이름 (100자를 넘을 수 없습니다.)  |
+|    email    |String|Y| 유저 이메일 (100자를 넘을 수 없습니다.) |
+| createdDate |LocalDateTime|Y|생성일|
+| updatedDate |LocalDateTime|Y|수정일|
 
 - 참고사항
 
@@ -380,15 +379,15 @@ HTTP/1.1 200 OK
     "id": 1,
     "name": "홍길동1",
     "email": "a@a.com",
-    "createdAt": "2024-11-28T20:55:09.198232",
-    "modifiedAt": "2024-11-28T20:55:09.198232"
+    "createdDate": "2024-11-28T20:55:09.198232",
+    "updatedDate": "2024-11-28T20:55:09.198232"
   },
   {
     "id": 2,
     "name": "홍길동2",
     "email": "b@b.com",
-    "createdAt": "2024-11-28T20:55:09.198232",
-    "modifiedAt": "2024-11-28T20:55:09.198232"
+    "createdDate": "2024-11-28T20:55:09.198232",
+    "updatedDate": "2024-11-28T20:55:09.198232"
   }
 ]
 ```
@@ -435,8 +434,8 @@ CREATE TABLE user
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '유저 고유 식별자',
     name VARCHAR(100) COMMENT '유저명',
     email VARCHAR(100) COMMENT '유저 이메일',
-    created_at DATETIME(6) COMMENT '작성일',
-    modified_at DATETIME(6) COMMENT '수정일'
+    created_date DATETIME(6) COMMENT '작성일',
+    modified_date DATETIME(6) COMMENT '수정일'
 );
 
 ```
@@ -444,8 +443,8 @@ CREATE TABLE user
 ### INSERT (유저 등록)
 ```mysql
 -- user 테이블에 데이터 삽입
-INSERT INTO user (id, name, email, created_at, modified_at) VALUES('1', '홍길동', "a@a.com", now(), now());
-INSERT INTO user (id, name, email, created_at, modified_at) VALUES('2', '김길동', "b@b.com", now(), now());
+INSERT INTO user (id, name, email, created_date, updated_date) VALUES('1', '홍길동', 'a@a.com', now(), now());
+INSERT INTO user (id, name, email, user.created_date, updated_date) VALUES('2', '김길동', 'b@b.com', now(), now());
 ```
 
 ### SELECT (특정 유저 조회 & 전체 유저 조회)
