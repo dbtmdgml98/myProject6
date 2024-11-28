@@ -485,4 +485,4 @@ DELETE FROM user WHERE id = 1;
 
         한 유저는 여러 통화로 환전할 수 있고 한 통화는 여러 유저들에 의해 환전될 수 있다.(양방향) 이때, 유저와 통화의 관계는 다대다(N:N) 관계입니다.
 
-![img.png](img.png)
+![img_2.png](img_2.png)
