@@ -30,6 +30,7 @@ public class UserCurrencyResponseDto {
         this.updatedDate = updatedDate;
     }
 
+    // UserCurrency타입을 UserCurrencyResponseDto타입으로 변환
     public static UserCurrencyResponseDto toDto(UserCurrency savedUserCurrency) {
         return new UserCurrencyResponseDto(
                 savedUserCurrency.getId(),

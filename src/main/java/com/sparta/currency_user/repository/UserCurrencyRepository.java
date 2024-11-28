@@ -10,5 +10,6 @@ import java.util.List;
 
 public interface UserCurrencyRepository extends JpaRepository<UserCurrency, Long> {
 
+    // 특정 userId로 환전 요청 전체 조회
     List<UserCurrency> findAllByUserId(Long userId);
 }
