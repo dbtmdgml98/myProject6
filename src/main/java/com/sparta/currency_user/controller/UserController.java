@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponseDto> findUser(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDto> findUser(@PathVariable(value = "id") Long id) {
         return ResponseEntity.ok().body(userService.findById(id));
     }
 
@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<String> deleteUser(@PathVariable(value = "id") Long id) {
         userService.deleteUserById(id);
         return ResponseEntity.ok().body("정상적으로 삭제되었습니다.");
     }
