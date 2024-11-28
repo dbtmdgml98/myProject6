@@ -2,11 +2,13 @@ package com.sparta.currency_user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
-//@Table(name = "user")
+@Table(name = "user")
 public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +23,9 @@ public class User extends BaseEntity {
     }
 
     public User() {}
+
+    @OneToMany(mappedBy = "user")
+    private List<UserCurrency> userCurrencies = new ArrayList<>();
+
+
 }
