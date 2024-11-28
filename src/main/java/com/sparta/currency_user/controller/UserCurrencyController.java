@@ -3,16 +3,19 @@ package com.sparta.currency_user.controller;
 import com.sparta.currency_user.dto.UserCurrencyRequestDto;
 import com.sparta.currency_user.dto.UserCurrencyResponseDto;
 import com.sparta.currency_user.service.UserCurrencyService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/exchanges")
@@ -32,7 +35,14 @@ public class UserCurrencyController {
         return new ResponseEntity<>(exchanged, HttpStatus.CREATED);
     }
 
-    // R: 고객 고유 식별자를 기반으로 특정 고객이 수행한 환전 요청 조회
+    // R: 고객 고유 식별자를 기반으로 특정 고객이 수행한 환전 요청 전체 조회
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<List<UserCurrencyResponseDto>> findExchangeInformation(@PathVariable(value = "userId") Long userId) {
+
+        List<UserCurrencyResponseDto> exchangeInformationById = userCurrencyService.findExchangeInformationById(userId);
+
+        return new ResponseEntity<>(exchangeInformationById, HttpStatus.OK);
+    }
 
     // U: 특정 환전 요청 상태를 취소로 변경
 

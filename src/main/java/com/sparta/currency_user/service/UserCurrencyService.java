@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 
 
 @Service
@@ -29,8 +30,8 @@ public class UserCurrencyService {
     public UserCurrencyResponseDto exchange(Long currencyId, Long userId, UserCurrencyRequestDto userCurrencyRequestDto) {
         // 환전 전 금액, 환율, 유저
         Long amountInKrw = userCurrencyRequestDto.getAmountInKrw();
-        Currency currency = currencyRepository.findById(currencyId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT,"NOT FOUND CURRENCY"));
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT, "NOT FOUND USER"));
+        Currency currency = currencyRepository.findById(currencyId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT,"통화 아이디가 존재하지 않습니다."));
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT, "유저 아이디가 존재하지 않습니다."));
 
         // Long -> BigDecimal 타입 변환
         BigDecimal bigDecimalAmountInKrw = BigDecimal.valueOf(amountInKrw);
@@ -48,5 +49,12 @@ public class UserCurrencyService {
         UserCurrency savedUserCurrency = userCurrencyRepository.save(userCurrency);
 
         return UserCurrencyResponseDto.toDto(savedUserCurrency);
+    }
+
+    public List<UserCurrencyResponseDto> findExchangeInformationById(Long userId) {
+
+        List<UserCurrency> userCurrencyList = userCurrencyRepository.findAllByUserId(userId);
+
+        return userCurrencyList.stream().map(UserCurrencyResponseDto::toDto).toList();
     }
 }

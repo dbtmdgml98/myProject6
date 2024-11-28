@@ -1,6 +1,5 @@
 package com.sparta.currency_user.dto;
 
-import com.sparta.currency_user.entity.Currency;
 import com.sparta.currency_user.entity.UserCurrency;
 import lombok.Getter;
 
