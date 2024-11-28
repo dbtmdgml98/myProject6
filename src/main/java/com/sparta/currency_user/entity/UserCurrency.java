@@ -7,10 +7,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Entity
+@Getter
 @Table(name = "user_currency")
 public class UserCurrency extends BaseEntity {
 
@@ -31,4 +34,14 @@ public class UserCurrency extends BaseEntity {
     private BigDecimal amountAfterExchange;
 
     private String status;
+
+    public UserCurrency() {}
+
+    public UserCurrency(User user, Currency currency, Long amountInKrw, BigDecimal amountAfterExchange, String status) {
+        this.user = user;
+        this.currency = currency;
+        this.amountInKrw = amountInKrw;
+        this.amountAfterExchange = amountAfterExchange;
+        this.status = status;
+    }
 }
