@@ -24,8 +24,8 @@ public class User extends BaseEntity {
 
     public User() {}
 
-    @OneToMany(mappedBy = "user")
+    // 부모=유저(User), 자식=환전(UserCurrency) -> `orphanRemoval = true`는 부모 엔티티를 삭제하면 자식 엔티티도 삭제한다.
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<UserCurrency> userCurrencies = new ArrayList<>();
-
 
 }

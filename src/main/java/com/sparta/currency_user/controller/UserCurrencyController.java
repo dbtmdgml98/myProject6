@@ -54,15 +54,4 @@ public class UserCurrencyController {
         return new ResponseEntity<>(userCurrencyResponseDto, HttpStatus.OK);
     }
 
-    // D: 고객이 삭제될 때 해당 고객이 수행한 모든 환전 요청도 삭제
-    // 부모=고객, 자식=환전
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteAllExchange(@PathVariable(value = "id") Long id) {
-
-        userCurrencyService.deleteAllExchange(id);
-
-        return new ResponseEntity<>("해당 유저가 수행한 모든 환전 요청이 삭제되었습니다.", HttpStatus.OK);
-    }
-
-
 }

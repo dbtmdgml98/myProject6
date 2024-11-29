@@ -8,6 +8,10 @@ import com.sparta.currency_user.entity.UserCurrency;
 import com.sparta.currency_user.repository.CurrencyRepository;
 import com.sparta.currency_user.repository.UserCurrencyRepository;
 import com.sparta.currency_user.repository.UserRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,6 +30,9 @@ public class UserCurrencyService {
     private final UserCurrencyRepository userCurrencyRepository;
     private final CurrencyRepository currencyRepository;
 
+//    EntityManagerFactory emf = Persistence.createEntityManagerFactory("entity");
+//    EntityManager em =  emf.createEntityManager();
+//    EntityTransaction transaction = em.getTransaction();
 
     public UserCurrencyResponseDto exchange(Long currencyId, Long userId, UserCurrencyRequestDto userCurrencyRequestDto) {
 
@@ -77,15 +84,5 @@ public class UserCurrencyService {
         userCurrencyRepository.save(findUserCurrency);
 
         return UserCurrencyResponseDto.toDto(findUserCurrency);
-    }
-
-    public void deleteAllExchange(Long id) {
-
-        // 삭제할 환전 요청 리스트 DB에서 조회
-        List<UserCurrency> findUserCurrencyList = userCurrencyRepository.findAllByUserId(id);
-
-        // 리스트가 존재하면 조회된 리스트를 삭제
-        userCurrencyRepository.deleteAll(findUserCurrencyList);
-
     }
 }
