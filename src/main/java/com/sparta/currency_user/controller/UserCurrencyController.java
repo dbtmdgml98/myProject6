@@ -3,10 +3,10 @@ package com.sparta.currency_user.controller;
 import com.sparta.currency_user.dto.UserCurrencyRequestDto;
 import com.sparta.currency_user.dto.UserCurrencyResponseDto;
 import com.sparta.currency_user.service.UserCurrencyService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +29,7 @@ public class UserCurrencyController {
     @PostMapping
     public ResponseEntity<UserCurrencyResponseDto> exchange(@RequestParam(value = "currencyId") Long currencyId,
                                                             @RequestParam(value = "userId") Long userId,
-                                                            @RequestBody UserCurrencyRequestDto userCurrencyRequestDto) {
+                                                            @Valid @RequestBody UserCurrencyRequestDto userCurrencyRequestDto) {
 
         UserCurrencyResponseDto exchanged = userCurrencyService.exchange(currencyId, userId, userCurrencyRequestDto);
 

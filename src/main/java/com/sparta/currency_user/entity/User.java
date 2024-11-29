@@ -1,6 +1,9 @@
 package com.sparta.currency_user.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -14,7 +17,13 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Column(length = 100)
     private String name;
+
+    @Email
+    @NotNull
+    @Column(length = 100)
     private String email;
 
     public User(String name, String email) {

@@ -193,9 +193,9 @@ Content-Type: application/json
 CREATE TABLE currency
 (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '통화 고유 식별자',
-    currency_name VARCHAR(50) COMMENT '통화 이름',
-    exchange_rate DECIMAL(38,2) COMMENT '환율',
-    symbol VARCHAR(50) COMMENT '표시',
+    currency_name VARCHAR(50) NOT NULL COMMENT '통화 이름',
+    exchange_rate DECIMAL(38,2) NOT NULL COMMENT '환율',
+    symbol VARCHAR(50) NOT NULL COMMENT '표시',
     created_date DATETIME(6) COMMENT '작성일',
     updated_date DATETIME(6) COMMENT '수정일'
 );
@@ -432,8 +432,8 @@ HTTP/1.1 200 OK
 CREATE TABLE user
 (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '유저 고유 식별자',
-    name VARCHAR(100) COMMENT '유저명',
-    email VARCHAR(100) COMMENT '유저 이메일',
+    name VARCHAR(100) NOT NULL COMMENT '유저명',
+    email VARCHAR(100) NOT NULL COMMENT '유저 이메일',
     created_date DATETIME(6) COMMENT '작성일',
     modified_date DATETIME(6) COMMENT '수정일'
 );
