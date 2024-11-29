@@ -6,6 +6,7 @@ import com.sparta.currency_user.service.UserCurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +46,7 @@ public class UserCurrencyController {
     }
 
     // U: 특정 환전 요청 상태를 취소로 변경
-    @PatchMapping("/changeStatus/{id}")
+    @PatchMapping("/updateStatus/{id}")
     public ResponseEntity<UserCurrencyResponseDto> updateExchangeStatus(@PathVariable(value = "id") Long id) {
 
         UserCurrencyResponseDto userCurrencyResponseDto = userCurrencyService.updateExchangeStatus(id);
@@ -54,5 +55,14 @@ public class UserCurrencyController {
     }
 
     // D: 고객이 삭제될 때 해당 고객이 수행한 모든 환전 요청도 삭제
+    // 부모=고객, 자식=환전
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteAllExchange(@PathVariable(value = "id") Long id) {
+
+        userCurrencyService.deleteAllExchange(id);
+
+        return new ResponseEntity<>("해당 유저가 수행한 모든 환전 요청이 삭제되었습니다.", HttpStatus.OK);
+    }
+
 
 }

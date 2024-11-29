@@ -28,6 +28,7 @@ public class UserCurrencyService {
 
 
     public UserCurrencyResponseDto exchange(Long currencyId, Long userId, UserCurrencyRequestDto userCurrencyRequestDto) {
+
         // 환전 전 금액, 환율, 유저
         Long amountInKrw = userCurrencyRequestDto.getAmountInKrw();
         Currency findCurrency = currencyRepository.findById(currencyId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT,"통화 아이디가 존재하지 않습니다."));
@@ -76,5 +77,15 @@ public class UserCurrencyService {
         userCurrencyRepository.save(findUserCurrency);
 
         return UserCurrencyResponseDto.toDto(findUserCurrency);
+    }
+
+    public void deleteAllExchange(Long id) {
+
+        // 삭제할 환전 요청 리스트 DB에서 조회
+        List<UserCurrency> findUserCurrencyList = userCurrencyRepository.findAllByUserId(id);
+
+        // 리스트가 존재하면 조회된 리스트를 삭제
+        userCurrencyRepository.deleteAll(findUserCurrencyList);
+
     }
 }
