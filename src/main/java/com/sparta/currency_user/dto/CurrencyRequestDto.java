@@ -10,14 +10,14 @@ import java.math.BigDecimal;
 @Getter
 public class CurrencyRequestDto {
 
-    @NotNull
+    @NotNull(message = "통화 이름은 필수입니다.")
     @Column(length = 50)
     private String currencyName;
 
-    @NotNull
+    @NotNull(message = "환율은 필수입니다.")
     private BigDecimal exchangeRate;
 
-    @NotNull
+    @NotNull(message = "통화 표시는 필수입니다.")
     @Column(length = 50)
     private String symbol;
 

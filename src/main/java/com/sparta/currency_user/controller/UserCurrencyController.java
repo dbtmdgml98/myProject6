@@ -40,7 +40,7 @@ public class UserCurrencyController {
     @GetMapping("/users/{userId}")
     public ResponseEntity<List<UserCurrencyResponseDto>> findExchangeInformations(@PathVariable(value = "userId") Long userId) {
 
-        List<UserCurrencyResponseDto> exchangeInformationById = userCurrencyService.findExchangeInformationsById(userId);
+        List<UserCurrencyResponseDto> exchangeInformationById = userCurrencyService.findExchangeInformationById(userId);
 
         return new ResponseEntity<>(exchangeInformationById, HttpStatus.OK);
     }

@@ -8,13 +8,10 @@ import com.sparta.currency_user.entity.UserCurrency;
 import com.sparta.currency_user.repository.CurrencyRepository;
 import com.sparta.currency_user.repository.UserCurrencyRepository;
 import com.sparta.currency_user.repository.UserRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
@@ -30,10 +27,9 @@ public class UserCurrencyService {
     private final UserCurrencyRepository userCurrencyRepository;
     private final CurrencyRepository currencyRepository;
 
-//    EntityManagerFactory emf = Persistence.createEntityManagerFactory("entity");
-//    EntityManager em =  emf.createEntityManager();
-//    EntityTransaction transaction = em.getTransaction();
+    final int ROUND_NUMBER = 2;
 
+    @Transactional
     public UserCurrencyResponseDto exchange(Long currencyId, Long userId, UserCurrencyRequestDto userCurrencyRequestDto) {
 
         // 환전 전 금액, 환율, 유저
@@ -44,7 +40,7 @@ public class UserCurrencyService {
         // Long -> BigDecimal 타입 변환
         BigDecimal bigDecimalAmountInKrw = BigDecimal.valueOf(amountInKrw);
         // 환전 후 금액 = 환전 전 금액 / 환율 (소수점 두번째까지 반올림)
-        BigDecimal amountAfterExchange = bigDecimalAmountInKrw.divide(findCurrency.getExchangeRate(), 2, RoundingMode.HALF_UP);
+        BigDecimal amountAfterExchange = bigDecimalAmountInKrw.divide(findCurrency.getExchangeRate(), ROUND_NUMBER, RoundingMode.HALF_UP);
 
         // UserCurrency 객체 생성
         UserCurrency userCurrency = new UserCurrency(
@@ -62,7 +58,7 @@ public class UserCurrencyService {
         return UserCurrencyResponseDto.toDto(savedUserCurrency);
     }
 
-    public List<UserCurrencyResponseDto> findExchangeInformationsById(Long userId) {
+    public List<UserCurrencyResponseDto> findExchangeInformationById(Long userId) {
 
         // 환전 요청 리스트 DB에서 조회
         List<UserCurrency> findUserCurrencyList = userCurrencyRepository.findAllByUserId(userId);
@@ -71,17 +67,14 @@ public class UserCurrencyService {
         return findUserCurrencyList.stream().map(UserCurrencyResponseDto::toDto).toList();
     }
 
+    @Transactional
     public UserCurrencyResponseDto updateExchangeStatus(Long id) {
 
         // DB에서 요청한 id에 맞는 UserCurrency 조회
         UserCurrency findUserCurrency = userCurrencyRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT, "유저 아이디가 존재하지 않습니다."));
 
         // id가 존재하면 조회된 객체의 Status를 cancelled로 수정
-//        UserCurrency updatedUserCurrency = userCurrencyRepository.updateUserCurrencyByIdAndStatus(findUserCurrency.getId(), "cancelled");
         findUserCurrency.updateStatus("cancelled");
-
-        // 수정 정보 DB에 저장
-        userCurrencyRepository.save(findUserCurrency);
 
         return UserCurrencyResponseDto.toDto(findUserCurrency);
     }

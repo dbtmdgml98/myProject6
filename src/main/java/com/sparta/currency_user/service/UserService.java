@@ -53,8 +53,11 @@ public class UserService {
 //        userRepository.deleteById(id);
 
         // cascade 제거
-        User findUser = em.find(User.class, id);
-        em.remove(findUser);    // 컬렉션이 제거되었으므로 환전요청도 모두 제거된다.
+//        User findUser = em.find(User.class, id);
+//        em.remove(findUser);    // 컬렉션이 제거되었으므로 환전요청도 모두 제거된다.
+
+        User findUser = findUserById(id);
+        userRepository.delete(findUser);
     }
 
 }
