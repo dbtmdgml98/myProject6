@@ -4,7 +4,7 @@ import com.sparta.currency_user.dto.UserRequestDto;
 import com.sparta.currency_user.dto.UserResponseDto;
 import com.sparta.currency_user.entity.User;
 import com.sparta.currency_user.repository.UserRepository;
-import jakarta.persistence.EntityManager;
+//import jakarta.persistence.EntityManager;
 //import jakarta.persistence.EntityManagerFactory;
 //import jakarta.persistence.EntityTransaction;
 //import jakarta.persistence.Persistence;
@@ -23,8 +23,9 @@ public class UserService {
 //    EntityManagerFactory emf = Persistence.createEntityManagerFactory("entity");
 //    EntityManager em =  emf.createEntityManager();
 //    EntityTransaction transaction = em.getTransaction();
-    @PersistenceContext
-    private EntityManager em;
+
+//    @PersistenceContext
+//    private EntityManager em;
 
     public UserResponseDto findById(Long id) {
         return new UserResponseDto(findUserById(id));
